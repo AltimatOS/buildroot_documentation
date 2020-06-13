@@ -4,6 +4,14 @@ Documentation for building AltimatOS's build roots. This is largely based off th
 
 # Table of Contents:
 
+1. [Preface](#preface)
+1. [Introduction](#introduction)
+1. [Preparations](#preparations)
+1. [Building the Cross Tool Chain](#building-the-cross-tool-chain)
+1. [Building the Basic Build Root](#building-the-basic-build-root)
+1. [Preparing the Chroot Environment](#preparing-the-chroot-environment)
+1. [Building AltimatOS' Core](#building-altimatos'-core)
+
 ## Preface
 
 ## Introduction
@@ -23,5 +31,3 @@ Documentation for building AltimatOS's build roots. This is largely based off th
 ## Preparing the Chroot Environment
 
 ## Building AltimatOS' Core
-
-## 
