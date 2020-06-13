@@ -1,5 +1,5 @@
 | Navigation |||
-| --- | --- | --- |
+| --- | --- | ---: |
 | [Previous](README.md) | [HOME](README.md) | [Next](Introduction.md) |
 
 # Preface
@@ -39,5 +39,5 @@ The pacakges that are required and their minimum versions are listed below:
 | ZLib | 1.2.0 |
 
 | Navigation |||
-| --- | --- | --- |
+| --- | --- | ---: |
 | [Previous](README.md) | [HOME](README.md) | [Next](Introduction.md) |

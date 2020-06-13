@@ -1,5 +1,5 @@
 | Navigation |||
-| --- | --- | --- |
+| --- | --- | ---: |
 | [Previous](Preface.md) | [HOME](README.md) | [Next](Preparations.md) |
 
 # Introduction
@@ -47,5 +47,5 @@ The AltimatOS development team would like to acknowledge the teams and projects 
 Thank you all for your support.
 
 | Navigation |||
-| --- | --- | --- |
+| --- | --- | ---: |
 | [Previous](Preface.md) | [HOME](README.md) | [Next](Preparations.md) |
