@@ -4,7 +4,7 @@ Documentation for building AltimatOS's build roots. This is largely based off th
 
 ## Table of Contents:
 
-1. [Preface](#preface)
+1. [Preface](Preface.md#preface)
 1. [Introduction](#introduction)
 1. [Preparations](#preparations)
    1. [Creating the new Partition](#creating-the-new-partition)
