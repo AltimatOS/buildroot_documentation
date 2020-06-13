@@ -1,10 +1,8 @@
-# AltimatOS
-
 | Navigation |||
 | --- | --- | --- |
 | [Previous](README.md) | [HOME](README.md) | [Next](Introduction.md) |
 
-## Preface
+# Preface
 
 This documentation is based heavily off the documentation of the CLFS project, and modified accordingly when needed for AltimatOS's unique requirements.
 

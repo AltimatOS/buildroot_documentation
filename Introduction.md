@@ -1,10 +1,8 @@
-# AltimatOS
-
 | Navigation |||
 | --- | --- | --- |
 | [Previous](Preface.md) | [HOME](README.md) | [Next](Preparations.md) |
 
-## Introduction
+# Introduction
 
 This section covers acknowledgements and information about how to use this documenation.
 
