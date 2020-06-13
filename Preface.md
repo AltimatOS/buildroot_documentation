@@ -1,5 +1,9 @@
 # AltimatOS
 
+| Navigation |||
+| --- | --- | --- |
+| [Previous](README.md) | [HOME](README.md) | [Next](Introduction.md) |
+
 ## Preface
 
 This documentation is based heavily off the documentation of the CLFS project, and modified accordingly when needed for AltimatOS's unique requirements.
@@ -54,6 +58,6 @@ The pacakges that are required and their minimum versions are listed below:
 
 **ZLib: 1.2.0**
 
-[Previous](README.md)
-
-[Next](Introduction.md)
+| Navigation |||
+| --- | --- | --- |
+| [Previous](README.md) | [HOME](README.md) | [Next](Introduction.md) |
