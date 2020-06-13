@@ -4,11 +4,11 @@ Documentation for building AltimatOS's build roots. This is largely based off th
 
 ## Table of Contents:
 
-1. [Preface](Preface.md#preface)
-1. [Introduction](#introduction)
-1. [Preparations](#preparations)
-   1. [Creating the new Partition](#creating-the-new-partition)
-   1. [Final Pre-build Preparation](#final-pre-build-preparation)
+1. [Preface](Preface.md)
+1. [Introduction](Introduction.md)
+1. [Preparations](Preparations.md)
+   1. [Creating the new Partition](Preparations.md#creating-the-new-partition)
+   1. [Final Pre-build Preparation](Preparations.md#final-pre-build-preparation)
 1. [Building the Cross Tool Chain](#building-the-cross-tool-chain)
 1. [Building the Basic Build Root](#building-the-basic-build-root)
 1. [Preparing the Chroot Environment](#preparing-the-chroot-environment)
