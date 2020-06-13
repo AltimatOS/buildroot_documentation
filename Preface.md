@@ -16,47 +16,29 @@ To build AltimatOS' build root, or the core operating system itself, there are c
 
 The pacakges that are required and their minimum versions are listed below:
 
-**Bash: 2.05a**
-
-**Binutils: 2.12**
-
-**Bison: 1.875**
-
-**Bzip2: 1.0.2**
-
-**Coreutils: 5.0**
-
-**Diffutils: 2.8**
-
-**Findutils: 4.1.20**
-
-**Gawk: 3.1.5**
-
-**GCC: 4.1.2**
-
-**G++: 4.1.2**
-
-**Glibc: 2.2.5**
-
-**Grep: 2.5**
-
-**Gzip: 1.2.4**
-
-**Make: 3.80**
-
-**Ncurses: 5.3**
-
-**Patch: 2.5.4**
-
-**Sed: 3.0.2**
-
-**Tar: 1.22**
-
-**Texinfo or TexLive: 4.7|2020**
-
-**XZ Utils: 4.999.8beta**
-
-**ZLib: 1.2.0**
+| Software Package | Minimum Version |
+| --- | --- |
+| Bash | 2.05a |
+| Binutils | 2.12 |
+| Bison | 1.875 |
+| Bzip2 | 1.0.2 |
+| Coreutils | 5.0 |
+| Diffutils | 2.8 |
+| Findutils | 4.1.20 |
+| Gawk | 3.1.5 |
+| GCC: | 4.1.2 |
+| G++ | 4.1.2 |
+| Glibc | 2.2.5 |
+| Grep | 2.5 |
+| Gzip | 1.2.4 |
+| Make | 3.80 |
+| Ncurses | 5.3 |
+| Patch | 2.5.4 |
+| Sed | 3.0.2 |
+| GNU Tar | 1.22 |
+| Texinfo or TexLive | 4.7 or 2020 repectively |
+| XZ Utils | 4.999.8beta |
+| ZLib | 1.2.0 |
 
 | Navigation |||
 | --- | --- | --- |
