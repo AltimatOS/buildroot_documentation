@@ -54,4 +54,6 @@ The pacakges that are required and their minimum versions are listed below:
 
 **ZLib: 1.2.0**
 
+[Previous](README.md)
 
+[Next](Introduction.md)
