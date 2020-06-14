@@ -15,7 +15,7 @@ echo "URL: ${fullurl}"
 
 pushd $SOURCE_TREE >/dev/null
     echo "Downloading ${fullurl}"
-    curl -# --url ${fullurl} --output ${filename}
+    curl -L -# --url ${fullurl} --output ${filename}
     echo "Unpacking ${filename}"
     tar xvf ${filename}
     pushd "${pkgname}-${pkgversion}" >/dev/null
