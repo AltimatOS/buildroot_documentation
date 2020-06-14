@@ -20,9 +20,9 @@ pushd $SOURCE_TREE >/dev/null
     tar xvf ${filename}
     pushd "${pkgname}-${pkgversion}" >/dev/null
         echo "Compiling ${pkgname}"
-        make mrproper
-        make ARCH=x86_64 headers_check
+        ./configure --prefix=$TARGET_DIRECTORY
+        make
+        make install
         echo "Installing ${pkgname}"
-        make ARCH=x86_64 INSTALL_HDR_PATH=/tools headers_install
     popd >/dev/null
 popd >/dev/null
