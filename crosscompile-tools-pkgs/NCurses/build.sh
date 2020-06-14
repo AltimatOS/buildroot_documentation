@@ -20,9 +20,10 @@ pushd $SOURCE_TREE >/dev/null
     tar xvf ${filename}
     pushd "${pkgname}-${pkgversion}" >/dev/null
         echo "Compiling ${pkgname}"
-        make mrproper
-        make ARCH=x86_64 headers_check
+        AWK=gawk ./configure --prefix=/$TARGET_DIRECTORY --without-debug
+        make -C include
+        make -C progs tic
         echo "Installing ${pkgname}"
-        make ARCH=x86_64 INSTALL_HDR_PATH=/tools headers_install
+        install -v -m755 progs/tic $TARGET_DIRECTORY/bin
     popd >/dev/null
 popd >/dev/null
