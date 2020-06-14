@@ -16,6 +16,7 @@ Documentation for building AltimatOS's build roots. This is largely based off th
    1. [Linux Headers](crosscompile-tools-pkgs/LinuxHeaders/)
    1. [M4](crosscompile-tools-pkgs/M4/)
    1. [NCurses](crosscompile-tools-pkgs/NCurses/)
+   1. [PkgConf](crosscompile-tools-pkgs/PkgConf/)
 1. [Building the Basic Build Root](#building-the-basic-build-root)
 1. [Preparing the Chroot Environment](#preparing-the-chroot-environment)
 1. [Building AltimatOS' Core](#building-altimatos'-core)

@@ -1,6 +1,6 @@
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../M4/) | [HOME](../../README.md) | [Next](../PkgConfig/) |
+| [Previous](../M4/) | [HOME](../../README.md) | [Next](../PkgConf/) |
 
 # M4 - A Macro Processing Language
 
@@ -27,4 +27,4 @@ popd
 
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../M4/) | [HOME](../../README.md) | [Next](../PkgConfig/) |
+| [Previous](../M4/) | [HOME](../../README.md) | [Next](../PkgConf/) |
