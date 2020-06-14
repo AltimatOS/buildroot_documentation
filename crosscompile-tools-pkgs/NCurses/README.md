@@ -2,9 +2,9 @@
 | --- | --- | ---: |
 | [Previous](../M4/) | [HOME](../../README.md) | [Next](../PkgConf/) |
 
-# M4 - A Macro Processing Language
+# NCurses - Terminal output and input library and utilities
 
-The `m4` package provides a macro processor used heavily by the GNU Make utility.
+The `ncurses` library is used to control drawing output and managing input on terminal screens. 
 
 To build it, run the following command as the `builder` user:
 
