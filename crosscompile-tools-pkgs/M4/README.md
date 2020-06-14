@@ -6,6 +6,12 @@
 
 The `m4` package provides a macro processor used heavily by the GNU Make utility.
 
+There is an unfortunate bug that breaks the build on many systems. To fix this, please apply the patch linked [here](gnulib-libio.patch), like so from within the unpacked source code:
+
+```bash
+patch -p1 <gnulib-libio.patch
+```
+
 To build it, run the following command as the `builder` user:
 
 ```bash
