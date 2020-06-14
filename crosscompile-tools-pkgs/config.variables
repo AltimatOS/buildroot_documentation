@@ -1,0 +1,2 @@
+SOURCE_TREE=/sources
+TARGET_DIRECTORY=/cross-tools

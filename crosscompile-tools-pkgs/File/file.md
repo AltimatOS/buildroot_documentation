@@ -19,6 +19,9 @@ pushd /source
 popd
 ```
 
+- [Build JSON](build.json)
+- [Build Script](build.sh)
+
 **NOTE:** We will not build the test suits of various packages during the cross-compile phase as they will not accurately run in many cases.
 
 | Navigation |||
