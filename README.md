@@ -11,7 +11,7 @@ Documentation for building AltimatOS's build roots. This is largely based off th
    1. [Creating the Filesystem](Preparations.md#creating-the-filesystem)
    1. [Mounting the Filesystem](Preparations.md#mounting-the-filesystem)
    1. [Final Pre-build Preparation](Preparations.md#final-pre-build-preparation)
-1. [Building the Cross Tool Chain](#building-the-cross-tool-chain)
+1. [Building the Cross Tool Chain](CrossToolChain.md#building-the-cross-tool-chain)
 1. [Building the Basic Build Root](#building-the-basic-build-root)
 1. [Preparing the Chroot Environment](#preparing-the-chroot-environment)
 1. [Building AltimatOS' Core](#building-altimatos'-core)
