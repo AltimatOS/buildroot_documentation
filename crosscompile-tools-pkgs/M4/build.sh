@@ -2,6 +2,16 @@
 
 source ../config.variables
 
+WORKING_DIR=$(pwd)
+BASEDIR=$(dirname $0)
+
+WD=
+if [[ "$BASEDIR" == '.' ]]; then
+    WD=$WORKING_DIR
+else
+    WD=$BASEDIR
+fi
+
 url=$(jq -r .url ./build.json)
 pkgversion=$(jq -r .pkgversion ./build.json)
 pkgname=$(jq -r .pkgname ./build.json)
@@ -19,6 +29,7 @@ pushd $SOURCE_TREE >/dev/null
     echo "Unpacking ${filename}"
     tar xvf ${filename}
     pushd "${pkgname}-${pkgversion}" >/dev/null
+        patch -p1 <"$WD/gnulib-libio.patch"
         echo "Compiling ${pkgname}"
         ./configure --prefix=$TARGET_DIRECTORY
         make
