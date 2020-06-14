@@ -17,7 +17,7 @@ The table below lists each package to build and their respective versions, along
 | File | 5.38 | [build instructions](crosscompile-tools-pkgs/File/) |
 | Linux Headers | 5.6.18 | [build instructions](crosscompile-tools-pkgs/LinuxHeaders/) |
 | M4 | 1.4.18 | [build instructions](crosscompile-tools-pkgs/M4/) |
-||||
+| NCurses | 6.2 | [build instructions](crosscompile-tools-pkgs/NCurses/) |
 
 
 | Navigation |||
