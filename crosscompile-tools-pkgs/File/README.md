@@ -1,6 +1,6 @@
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../../CrossToolChain.md) | [HOME](../../README.md) | [Next](../LinuxHeaders/linuxheaders.md) |
+| [Previous](../../CrossToolChain.md) | [HOME](../../README.md) | [Next](../LinuxHeaders/) |
 
 # File - A tool for discovering the type of a file
 
@@ -26,4 +26,4 @@ popd
 
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../../CrossToolChain.md) | [HOME](../../README.md) | [Next](../LinuxHeaders/linuxheaders.md) |
+| [Previous](../../CrossToolChain.md) | [HOME](../../README.md) | [Next](../LinuxHeaders/) |

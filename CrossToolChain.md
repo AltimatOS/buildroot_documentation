@@ -14,9 +14,9 @@ The table below lists each package to build and their respective versions, along
 
 | Package | Version | Page |
 | --- | --- | --- |
-| File | 5.38 | [build instructions](crosscompile-tools-pkgs/File/file.md) |
-| Linux Headers | 5.6.18 | [build instructions](crosscompile-tools-pkgs/LinuxHeaders/linuxheaders.md) |
-| M4 | 1.4.18 | [build instructions](crosscompile-tools-pkgs/M4/m4.md) |
+| File | 5.38 | [build instructions](crosscompile-tools-pkgs/File/) |
+| Linux Headers | 5.6.18 | [build instructions](crosscompile-tools-pkgs/LinuxHeaders/) |
+| M4 | 1.4.18 | [build instructions](crosscompile-tools-pkgs/M4/) |
 ||||
 
 

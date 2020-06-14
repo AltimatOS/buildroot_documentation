@@ -1,6 +1,6 @@
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../LinuxHeaders/linuxheaders.md) | [HOME](../../README.md) | [Next](../NCurses/ncurses.md) |
+| [Previous](../LinuxHeaders/) | [HOME](../../README.md) | [Next](../NCurses/) |
 
 # M4 - A Macro Processing Language
 
@@ -26,4 +26,4 @@ popd
 
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../LinuxHeaders/linuxheaders.md) | [HOME](../../README.md) | [Next](../NCurses/ncurses.md) |
+| [Previous](../LinuxHeaders/) | [HOME](../../README.md) | [Next](../NCurses/) |

@@ -1,6 +1,6 @@
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../File/file.md) | [HOME](../../README.md) | [Next](../M4/m4.md) |
+| [Previous](../File/) | [HOME](../../README.md) | [Next](../M4/) |
 
 # Linux Headers - C headers describing built-in system calls
 
@@ -26,4 +26,4 @@ popd
 
 | Navigation |||
 | --- | --- | ---: |
-| [Previous](../File/file.md) | [HOME](../../README.md) | [Next](../M4/m4.md) |
+| [Previous](../File/) | [HOME](../../README.md) | [Next](../M4/) |
