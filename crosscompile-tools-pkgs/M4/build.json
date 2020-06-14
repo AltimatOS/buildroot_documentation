@@ -1,8 +1,8 @@
 {
-  "pkgname": "linux",
-  "pkgversion": "5.6.18",
-  "url": "https://cdn.kernel.org/pub/linux/kernel/v5.x/",
+  "pkgname": "m4",
+  "pkgversion": "1.4.18",
+  "url": "http://ftp.gnu.org/gnu/m4/",
   "file": "${pkgname}-${pkgversion}.tar.xz",
-  "summary": "C system call headers from the Linux kernel",
-  "description": "This package provides Linux kernel headers, the kernel API description required for compilation of almost all programs. This is the userspace interface."
+  "summary": "A macro processor language",
+  "description": "GNU m4 is an implementation of the traditional Unix macro processor."
 }
