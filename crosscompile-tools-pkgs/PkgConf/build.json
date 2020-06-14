@@ -1,0 +1,8 @@
+{
+  "pkgname": "pkgconf",
+  "pkgversion": "1.7.3",
+  "url": "https://github.com/pkgconf/pkgconf/archive/",
+  "file": "${pkgname}-${pkgversion}.tar.gz",
+  "summary": "Software to configure compiler and linker flags",
+  "description": "PkgConf is a more effience version of the older pkg-config tool. PkgConfig assists in configuring compiler and linker flags using .pc files."
+}
