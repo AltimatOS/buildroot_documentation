@@ -22,7 +22,7 @@ pushd $SOURCE_TREE >/dev/null
         echo "Compiling ${pkgname}"
         ./configure --prefix=$TARGET_DIRECTORY
         make
-        make install
         echo "Installing ${pkgname}"
+        make install
     popd >/dev/null
 popd >/dev/null
