@@ -1,0 +1,8 @@
+{
+  "pkgname": "linux",
+  "pkgversion": "5.6.18",
+  "url": "https://cdn.kernel.org/pub/linux/kernel/v5.x/",
+  "file": "${pkgname}-${pkgversion}.tar.xz",
+  "summary": "C system call headers from the Linux kernel",
+  "description": "This package provides Linux kernel headers, the kernel API description required for compilation of almost all programs. This is the userspace interface."
+}
