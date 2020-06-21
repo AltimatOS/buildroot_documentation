@@ -17,7 +17,7 @@ package File::IO {
     use Try::Tiny qw(try catch);
 
     use FindBin;
-    use lib "$FindBin::Bin/../../lib";
+    use lib "$FindBin::Bin/../lib";
 
     use Sys::Error;
 
@@ -30,13 +30,13 @@ package File::IO {
 
         $error = Sys::Error->new();
 
-        bless($class, $self);
+        bless($self, $class);
         return $self;
     }
 
     my sub mode_translate ($self, $mode_string) {
         my $mode = undef;
-        given $mode_string {
+        given ($mode_string) {
             when ('r') {
                 $mode = '<';
             }
@@ -61,7 +61,7 @@ package File::IO {
 
     our sub open ($self, $mode_string, $path) {
         my $fh = undef;
-        my $mode = $self->mode_translate($mode_string);
+        my $mode = mode_translate($self, $mode_string);
         try {
             open($fh, $mode, $path) or throw(
                 "Cannot open file", {
@@ -74,7 +74,7 @@ package File::IO {
         } catch {
             classify(
                 $ARG, {
-                    default = sub {
+                    default => sub {
                         # rethrow as a fatal
                         $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
                         throw $ARG->{'error'}, {
@@ -111,7 +111,7 @@ package File::IO {
         } catch {
             classify(
                 $ARG, {
-                    default = sub {
+                    default => sub {
                         # rethrow as fatal
                         $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
                         throw $ARG->{'error'}, {
@@ -147,7 +147,7 @@ package File::IO {
         } catch {
             classify(
                 $ARG, {
-                    default = sub {
+                    default => sub {
                         # rethrow as fatal
                         $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
                         throw $ARG->{'error'}, {
