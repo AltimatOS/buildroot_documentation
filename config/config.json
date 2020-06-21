@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "schemaType": "configuration",
+  "srcTree": "/sources",
+  "crossToolsDirectory": "/cross-tools",
+  "baseToolsDirectory": "/tools",
+  "buildRoot": "/AltimatOS",
+  "systemRoot": "${buildroot}/System",
+  "binDirectory": "${target_dir}/bin",
+  "libDirectory": "${target_dir}/lib",
+  "lib64Directory": "${target_dir}/lib64",
+  "dataDirectory": "${target_dir}/share"
+}

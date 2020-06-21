@@ -96,7 +96,7 @@ package Sys::Error {
             }
             when (15) {
                 $symbol     = "ENOTBLK";
-                $err_string = "Bock device required";
+                $err_string = "Block device required";
             }
             when (16) {
                 $symbol     = "EBUSY";
@@ -104,7 +104,7 @@ package Sys::Error {
             }
             when (17) {
                 $symbol     = "EEXIST";
-                $err_string = "Fie exists";
+                $err_string = "File exists";
             }
             when (18) {
                 $symbol     = "EXDEV";
