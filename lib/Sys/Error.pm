@@ -16,11 +16,11 @@ package Sys::Error {
     sub new ($class) {
         my $self = {};
 
-        bless($class, $self);
+        bless($self, $class);
         return $self;
     }
 
-    my sub err_msg ($self, $err_struct, $class) {
+    our sub err_msg ($self, $err_struct, $class) {
         say "$err_struct->{'error'}: $class";
         say "    Info:       $err_struct->{'info'}";
         say "    Trace:      $err_struct->{'trace'}";
@@ -29,9 +29,10 @@ package Sys::Error {
         exit $err_struct->{type};
     }
 
-    my sub error_string ($self, $error_code) {
+    our sub error_string ($self, $error_code) {
+        my $symbol     = undef;
         my $err_string = undef;
-        given $error_code {
+        given ($error_code) {
             when (0) {
                 # this is a psuedo error and isn't in POSIX per se
                 $symbol     = "OK";
@@ -162,7 +163,7 @@ package Sys::Error {
                 $err_string = "Too many links";
             }
             when (32) {
-                $symbol     = "EPIPE"
+                $symbol     = "EPIPE";
                 $err_string = "Broken pipe";
             }
             when (33) {
@@ -565,7 +566,7 @@ package Sys::Error {
 
         return {
             'code'      => $error_code,
-            'string'    => $error_string,
+            'string'    => $err_string,
             'symbol'    => $symbol
         }
     }
