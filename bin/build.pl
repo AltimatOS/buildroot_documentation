@@ -14,9 +14,8 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-package main {
-    use strict;
-    use warnings;
+package main v1.0.0 {
+    use strictures;
     use utf8;
     use English;
 
@@ -29,196 +28,78 @@ package main {
     use FindBin;
     use lib "$FindBin::Bin/../lib";
 
+    use Archive::Tar;
     use boolean qw(:all);
+    use Cwd;
+    use File::Copy 'cp';
+    use File::LibMagic;
     use File::Tools qw(:all);
     use Getopt::Long qw(:config gnu_compat);
-    use JSON5;
-    use Term::ANSIColor;
-    use Throw qw(throw classify);
-    use Try::Tiny qw(try catch);
+    use LWP::UserAgent;
 
+    use Console::IO qw(cout);
     use File::IO;
+    use File::IO::JSON;
+    use GNUzip::Decompress;
     use Sys::Error;
 
+    use AltimatOS::Build;
     use AltimatOS::Application::Error;
+
+    # global settings
+    $Throw::pretty = 1;
+    $Throw::trace  = 1;
 
     # some globals
     my $color_output = false;
-    my $config_json  = undef;
-    my $pkg          = undef;
-    my $stage        = undef;
-    my $VERSION      = '1.0.0';
 
     my $app_error    = AltimatOS::Application::Error->new();
     my $error        = Sys::Error->new();
 
-    my sub read_json ($path, $params) {
-        my $fh = undef;
-        my $fc = undef;
-        my $status = ();
+    my sub main (@args) {
+        my %flags = (
+            'debug'     => false,
+            'loglevel'  => 'none',
+            'logger'    => 'syslog'
+        );
 
-        my $schema_type    = $params->{'type'};
-        my $schema_version = $params->{'version'};
+        GetOptions(
+            'color'      => sub { $color_output = true },
+            'c|config=s' => sub { $flags{'config_json'} = $ARG[1] },
+            'p|pkg=s'    => sub { $flags{'pkg'}         = ucfirst($ARG[1]) },
+            's|stage=s'  => sub { $flags{'stage'}       = $ARG[1] },
+            'h|help'     => sub { AltimatOS::Build::show_help(); exit 0; },
+            'v|version'  => sub { AltimatOS::Build::show_version(); exit 0; }
+        );
+        my $builder = AltimatOS::Build->new(\%flags);
+        my $json_io = File::IO::JSON->new();
 
-        my $fio = File::IO->new();
-        ($fh, $status) = $fio->open('r', $path);
-        ($fc, $status) = $fio->read($fh, -s $fh);
-        $status = $fio->close($fh);
-
-        my $struct = {};
-        try {
-            my $json = JSON5->new();
-            $struct = $json->decode($fc);
-        } catch {
-            classify(
-                $ARG, {
-                    default => sub {
-                        $error->err_msg($ARG, "JSON to Perl conversion error");
-                        throw($ARG);
-                    }
-                }
-            );
-        };
-
-        try {
-            unless ($schema_type eq $struct->{'schemaType'}) {
-                throw "Invalid schema type", {
-                    'trace' => 3,
-                    'type'  => $app_error->err_string(150)->{'symbol'},
-                    'code'  => 150,
-                    'msg'   => $app_error->err_string(150)->{'string'}
-                }
-            }
-        } catch {
-            chomp $ARG;
-            classify(
-                $ARG, {
-                    default => sub {
-                        $error->err_msg($ARG, "Invalid file type");
-                        throw($ARG);
-                    }
-                }
-            )
-        };
-
-        return $struct;
-    }
-
-    my sub get_url ($struct) {
-        return $struct->{'uri'};
-    }
-
-    my sub get_pkgname ($struct) {
-        return $struct->{'pkgname'};
-    }
-
-    my sub get_pkgversion ($struct) {
-        return $struct->{'pkgversion'};
-    }
-
-    my sub get_patches ($struct) {
-        return @{$struct->{'patches'}};
-    }
-
-    my sub get_config_commands ($struct) {
-        return $struct->{'configCmds'};
-    }
-
-    my sub get_build_commands ($struct) {
-        return $struct->{'buildCmds'};
-    }
-
-    my sub get_install_commands ($struct) {
-        return $struct->{'installCmds'};
-    }
-
-    my sub get_source_dir ($struct) {
-        return $struct->{'srcTree'};
-    }
-
-    my sub get_tools_dir ($struct) {
-        return $struct->{'baseToolsDirectory'};
-    }
-
-    my sub get_cross_tools_dir ($struct) {
-        return $struct->{'crossToolsDirectory'};
-    }
-
-    my sub show_help {
-        say "build.pl - Perl-based software installer";
-        say "-" x 80;
-        say "\nOPTIONS:";
-        say "=" x 8;
-        say "  -c|--config=s  Location of config.json. Normally, this is determined";
-        say "                 automatically\n";
-        say "  -p|--pkg=s     Which package to build and install. This flag is required\n";
-        say "  -s|--stage=s   Which stage this is building. The stage can be one of the";
-        say "                 following:";
-        say "                  - crosstools";
-        say "                  - basetools";
-        say "                  - standard";
-        say "                 This flag is required.\n";
-        say "     --color     Display output in color\n";
-        say "  -h|--help      Show this help message\n";
-        say "  -v|--version   Show the version of this tool\n";
-    }
-
-    my sub show_version {
-        say "build.pl - Perl-based software installer";
-        say "-" x 80;
-        say "Version: $VERSION";
-        say "Author: Gary L. Greene, Jr <greeneg at tolharadys dot net>";
-        say "License: Apache Public License, version 2.0";
-    }
-
-    my sub process_args {
-        if (! defined $config_json) {
-            # discover the config.json. If not found, throw an exception
-        }
-
-        if (! defined $pkg) {
-            # this is fatal, we MUST have a package to work
-            say "Missing required flag, --pkg\n";
-            show_help();
-            exit 255;
-        }
-
-        if (! defined $stage) {
-            # this is fatal, we MUST have a stage to work
-            say "Missing required flag, --stage\n";
-            show_help();
-            exit 255;
-        }
-    }
-
-    my sub main {
-        # define our globals
-        my $file_name     = undef;
+        $builder->process_args(\%flags);
 
         my $config_struct = undef;
-        if (defined $config_json) {
-            $config_struct = read_json(
-                $config_json,
+        if (defined $flags{'config_json'}) {
+            $config_struct = $json_io->read_json(
+                $flags{'config_json'},
                 {
-                    'type' => 'configuration',
+                    'type'    => 'configuration',
                     'version' => 1
                 }
             );            
         } else {
-            $config_struct = read_json(
+            $config_struct = $json_io->read_json(
                 "$FindBin::Bin/../config/config.json",
                 {
-                    'type' => 'configuration',
+                    'type'    => 'configuration',
                     'version' => 1
                 }
             );
         }
-        my $source_dir      = get_source_dir($config_struct);
-        my $base_tools_dir  = get_tools_dir($config_struct);
-        my $cross_tools_dir = get_cross_tools_dir($config_struct);
+        my $source_dir      = $builder->get_source_dir($config_struct);
+        my $base_tools_dir  = $builder->get_tools_dir($config_struct);
+        my $cross_tools_dir = $builder->get_cross_tools_dir($config_struct);
 
         my $stage_dir = undef;
-        given ($stage) {
+        given ($flags{'stage'}) {
             when ('crosstools') {
                 $stage_dir = "crosscompile-tools-pkgs";
             }
@@ -230,34 +111,67 @@ package main {
             }
         }
 
-        my $pkg_struct   = read_json(
-            "$FindBin::Bin/../${stage_dir}/${pkg}/build.json",
+        my $pkg_struct   = $json_io->read_json(
+            "$FindBin::Bin/../${stage_dir}/$flags{'pkg'}/build.json",
             {
-                'type' => 'package',
+                'type'    => 'package',
                 'version' => 1
             }
         );
-        my $uri          = get_url($pkg_struct);
-        my $pkg_name     = get_pkgname($pkg_struct);
-        my $pkg_version  = get_pkgversion($pkg_struct);
-        my @patches      = get_patches($pkg_struct);
-        my $config_cmds  = get_config_commands($pkg_struct);
-        my $build_cmds   = get_build_commands($pkg_struct);
-        my $install_cmds = get_install_commands($pkg_struct);
+        my $uri          = $builder->get_url($pkg_struct);
+        my $pkg_name     = $builder->get_pkgname($pkg_struct);
+        my $pkg_version  = $builder->get_pkgversion($pkg_struct);
+        my $file_name    = $builder->get_file_name($pkg_struct, $pkg_version);
+        my @patches      = $builder->get_patches($pkg_struct);
+        my $config_cmds  = $builder->get_config_commands($pkg_struct);
+        my $build_cmds   = $builder->get_build_commands($pkg_struct);
+        my $install_cmds = $builder->get_install_commands($pkg_struct);
 
         my $target_dir = "$FindBin::Bin/../$stage_dir";
 
-    #    pushd 
+        # display what is to be built:
+        cout("Starting Build Tool...", true, $color_output, 'bold white', true);
+        cout("Build Stage: $flags{'stage'}", true, $color_output, 'bold cyan', true);
+        cout("Package Name: $pkg_name", true, $color_output, 'bold cyan', true);
+        cout("Package Version: $pkg_version", true, $color_output, 'bold cyan', true);
+
+        pushd $source_dir;
+            my $wd = getcwd();
+            cout("Working Directory: $wd", true, $color_output, 'magenta', true);
+            cout("Package URL: $uri/$file_name", true, $color_output, 'bold cyan', true);
+
+            # get package from remote site
+            # using curl directly for now. Will move to using LWP soon
+            cout("\nDownloading $file_name:", true, $color_output, 'bold blue', false);
+            system('curl', '-L', '-#', '--url', "${uri}/${file_name}", '--output', ${file_name});
+            cout("", false, $color_output, 'bold blue', true);
+
+            # determine type of archive that was downloaded
+            cout("Determining archive type... ", false, $color_output, 'bold cyan', false);
+            my $magic = File::LibMagic->new();
+            my $info  = $magic->info_from_filename("$source_dir/$file_name");
+            my $mime  = $info->{'mime_type'};
+            cout($mime, true, $color_output, 'bold yellow', true);
+
+            # unpack file
+            given ($mime) {
+                when ('application/gzip') {
+                    # this is likely a tarball with gzip compression, so first uncompress archive
+                    
+                }
+            }
+
+            # enter package source directory
+
+            # if there are patches, patch it
+
+            # configure the sources
+
+            # build them
+
+            # install them
+        popd
     }
 
-    GetOptions(
-        '--color'       => sub { $color_output = true },
-        '-c|--config=s' => \$config_json,
-        '-p|--pkg=s'    => \$pkg,
-        '-s|--stage=s'  => \$stage,
-        '-h|--help'     => sub { show_help() },
-        '-v|--version'  => sub { show_version() }
-    );
-    process_args();
-    main();
+    main(@ARGV);
 }

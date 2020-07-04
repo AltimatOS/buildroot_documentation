@@ -23,7 +23,8 @@ package File::IO {
 
     my $error = undef;
 
-    $Throw::level = 1;
+    $Throw::trace  = 1;
+    $Throw::pretty = 1;
 
     sub new ($class) {
         my $self = {};
@@ -66,8 +67,9 @@ package File::IO {
             open($fh, $mode, $path) or throw(
                 "Cannot open file", {
                     'trace' => 3,
+                    'info'  => "Attempted to open '$path' with mode '$mode'",
                     'type'  => $error->error_string($OS_ERROR)->{'symbol'},
-                    'code'  => $OS_ERROR,
+                    'code'  => int $OS_ERROR,
                     'msg'   => $error->error_string($OS_ERROR)->{'string'}
                 }
             );
@@ -76,7 +78,7 @@ package File::IO {
                 $ARG, {
                     default => sub {
                         # rethrow as a fatal
-                        $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
+                        $error->err_msg($ARG);
                         throw $ARG->{'error'}, {
                             'trace' => 3,
                             'type'  => $ARG->{'type'},
@@ -113,7 +115,7 @@ package File::IO {
                 $ARG, {
                     default => sub {
                         # rethrow as fatal
-                        $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
+                        $error->err_msg($ARG);
                         throw $ARG->{'error'}, {
                             'trace' => 3,
                             'type'  => $ARG->{'type'},
@@ -149,7 +151,7 @@ package File::IO {
                 $ARG, {
                     default => sub {
                         # rethrow as fatal
-                        $error->err_msg($ARG, $error->error_string($ARG->{'string'}));
+                        $error->err_msg($ARG);
                         throw $ARG->{'error'}, {
                             'trace' => 3,
                             'type'  => $ARG->{'type'},
