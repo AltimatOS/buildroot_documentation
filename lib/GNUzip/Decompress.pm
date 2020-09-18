@@ -19,7 +19,7 @@ package GNUzip::Decompress {
     use FindBin;
     use lib "$FindBin::Bin/../lib";
 
-    use Console::IO;
+    use Console::IO qw(cout);
     use Sys::Error;
 
     $Throw::level = 1;
