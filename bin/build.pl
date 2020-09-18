@@ -158,7 +158,7 @@ package main v1.0.0 {
                 when ('application/gzip') {
                     # this is likely a tarball with gzip compression, so first uncompress archive
                     cout "Decompressing gzip", true, $color_output. 'bold cyan';
-                    $gzip = GNUzip::Decompress->new();
+                    my $gzip = GNUzip::Decompress->new();
                     $gzip->decompress("$source_dir/$file_name");
                 }
                 default {
