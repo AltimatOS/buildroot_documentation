@@ -3,7 +3,7 @@ package AltimatOS::Build v1.0.0 {
     use utf8;
     use English;
 
-    use feature ":5.26";
+    use feature ":5.30";
     no warnings "experimental::signatures";
     no warnings "experimental::smartmatch";
     use feature "lexical_subs";

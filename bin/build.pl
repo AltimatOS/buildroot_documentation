@@ -19,7 +19,7 @@ package main v1.0.0 {
     use utf8;
     use English;
 
-    use feature ":5.26";
+    use feature ":5.30";
     no warnings "experimental::signatures";
     no warnings "experimental::smartmatch";
     use feature "lexical_subs";
@@ -130,36 +130,42 @@ package main v1.0.0 {
         my $target_dir = "$FindBin::Bin/../$stage_dir";
 
         # display what is to be built:
-        cout("Starting Build Tool...", true, $color_output, 'bold white', true);
-        cout("Build Stage: $flags{'stage'}", true, $color_output, 'bold cyan', true);
-        cout("Package Name: $pkg_name", true, $color_output, 'bold cyan', true);
-        cout("Package Version: $pkg_version", true, $color_output, 'bold cyan', true);
+        cout "Starting Build Tool...", true, $color_output, 'bold white', true;
+        cout "Build Stage: $flags{'stage'}", true, $color_output, 'bold cyan', true;
+        cout "Package Name: $pkg_name", true, $color_output, 'bold cyan', true;
+        cout "Package Version: $pkg_version", true, $color_output, 'bold cyan', true;
 
         pushd $source_dir;
             my $wd = getcwd();
-            cout("Working Directory: $wd", true, $color_output, 'magenta', true);
-            cout("Package URL: $uri/$file_name", true, $color_output, 'bold cyan', true);
+            cout "Working Directory: $wd", true, $color_output, 'magenta', true;
+            cout "Package URL: $uri/$file_name", true, $color_output, 'bold cyan', true;
 
             # get package from remote site
             # using curl directly for now. Will move to using LWP soon
-            cout("\nDownloading $file_name:", true, $color_output, 'bold blue', false);
+            cout "\nDownloading $file_name:", true, $color_output, 'bold blue';
             system('curl', '-L', '-#', '--url', "${uri}/${file_name}", '--output', ${file_name});
-            cout("", false, $color_output, 'bold blue', true);
+            cout "", false, $color_output, 'bold blue', true;
 
             # determine type of archive that was downloaded
-            cout("Determining archive type... ", false, $color_output, 'bold cyan', false);
+            cout "Determining archive type... ", false, $color_output, 'bold cyan';
             my $magic = File::LibMagic->new();
             my $info  = $magic->info_from_filename("$source_dir/$file_name");
             my $mime  = $info->{'mime_type'};
-            cout($mime, true, $color_output, 'bold yellow', true);
+            cout $mime, true, $color_output, 'bold yellow', true;
 
             # unpack file
             given ($mime) {
                 when ('application/gzip') {
                     # this is likely a tarball with gzip compression, so first uncompress archive
-                    
+                    cout "Decompressing gzip", true, $color_output. 'bold cyan';
+                    $gzip = GNUzip::Decompress->new();
+                    $gzip->decompress("$source_dir/$file_name");
+                }
+                default {
+                    cout "Unknown error";
                 }
             }
+            cout "error";
 
             # enter package source directory
 

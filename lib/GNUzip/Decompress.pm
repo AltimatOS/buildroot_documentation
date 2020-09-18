@@ -19,6 +19,7 @@ package GNUzip::Decompress {
     use FindBin;
     use lib "$FindBin::Bin/../lib";
 
+    use Console::IO;
     use Sys::Error;
 
     $Throw::level = 1;
@@ -36,12 +37,15 @@ package GNUzip::Decompress {
 
     my sub get_extension ($file) {
         # split the file into it's filename parts
-        my ($fn, $extension) = split()
+        my ($fn, $extension) = split(/\..*$/, $file);
+        return $extension;
     }
 
     our sub decompress ($self, $file) {
         # get the extension of the file
         my $extension = get_extension($file);
+
+        cout "File extension: $extension";
 
         # my $uncompressed_file = 
         # we expect that they sent us a gzipped file

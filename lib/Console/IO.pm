@@ -18,7 +18,7 @@ package Console::IO {
     use boolean;
     use Term::ANSIColor;
 
-    our sub cout ($string, $newline, $color_output, $color_attrib, $do_reset) {
+    our sub cout ($string, $newline = true, $color_output = false, $color_attrib = '', $do_reset = false) {
         my $output = undef;
         if ($color_output eq true && defined $color_attrib) {
             if (defined $do_reset && $do_reset eq true) {
