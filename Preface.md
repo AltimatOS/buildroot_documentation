@@ -12,7 +12,7 @@ This documentation assumes that the reader has a fairly good grasp of how to bui
 
 To build AltimatOS' build root, or the core operating system itself, there are certain packages that must be available. Note, the cross-tool chain can be built on just about any unix-like OS, whether that be a system in the BSD, SysV, Linux, or other UNIX heritage. By default, we recommend using a Linux host as the base to avoid certain build gotchas, however. Additionally, while any Linux distribution can be used for building the OS, we currently have only tested these instructions on openSUSE Leap and Tumbleweed. Any needed patches or steps required to make it work on other UNIX platforms or Linux distributions are welcomed as patches to this documentation.
 
-The pacakges that are required and their minimum versions are listed below:
+The packages that are required and their minimum versions are listed below:
 
 | Software Package | Minimum Version |
 | --- | --- |
