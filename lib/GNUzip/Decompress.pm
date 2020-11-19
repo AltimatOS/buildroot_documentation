@@ -37,7 +37,7 @@ package GNUzip::Decompress {
 
     my sub get_extension ($file) {
         # split the file into it's filename parts
-        my ($fn, $extension) = split(/^.*\..[a-z]*$/, $file);
+        my ($fn, $extension) = split(/^.*\.[a-z]*$/, $file);
         return $extension;
     }
 
