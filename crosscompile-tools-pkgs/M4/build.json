@@ -1,8 +1,18 @@
 {
+  "schemaVersion": 1,
+  "schemaType": "package",
   "pkgname": "m4",
   "pkgversion": "1.4.18",
   "url": "http://ftp.gnu.org/gnu/m4/",
+  "compressionType": "application/xz",
+  "archiveType": "application/x-tar",
   "file": "${pkgname}-${pkgversion}.tar.xz",
   "summary": "A macro processor language",
-  "description": "GNU m4 is an implementation of the traditional Unix macro processor."
+  "description": "GNU m4 is an implementation of the traditional Unix macro processor.",
+  "patches": [
+    "gnulib-libio.patch"
+  ],
+  "configCmds": "./configure --prefix=/cross-tools",
+  "buildCmds": "make",
+  "installCmds": "make install"
 }
