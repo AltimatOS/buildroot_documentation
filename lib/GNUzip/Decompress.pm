@@ -37,12 +37,14 @@ package GNUzip::Decompress {
 
     my sub get_extension ($file) {
         # split the file into it's filename parts
+        cout "File name: $file";
         my ($fn, $extension) = split(/\..*$/, $file);
         return $extension;
     }
 
     our sub decompress ($self, $file) {
         # get the extension of the file
+        cout "File name: $file";
         my $extension = get_extension($file);
 
         cout "File extension: $extension";
