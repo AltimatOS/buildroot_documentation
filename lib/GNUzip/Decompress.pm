@@ -12,6 +12,7 @@ package GNUzip::Decompress {
     use feature "switch";
 
     use boolean;
+    use File::Basename;
     use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
     use Throw qw(throw classify);
     use Try::Tiny qw(try catch);
@@ -37,20 +38,37 @@ package GNUzip::Decompress {
 
     my sub get_extension ($file) {
         # split the file into it's filename parts
-        my ($fn, $extension) = split(/^.*\.[a-z]*$/, $file);
-        return $extension;
+        my ($fn, $extension) = basename($file) =~ m/^(.*)\.([a-zA-Z0-9]+)$/;
+        return $fn, $extension;
     }
 
     our sub decompress ($self, $file) {
         # get the extension of the file
         cout "File name: $file";
-        my $extension = get_extension($file);
+        my ($ucfilename, $extension) = get_extension($file);
 
         cout "File extension: $extension";
+        cout "Un-compressed filename: $ucfilename";
 
-        # my $uncompressed_file = 
         # we expect that they sent us a gzipped file
-
+        try {
+            gunzip $file => $ucfilename or
+              throw "GNUzip Decompression error", {
+                  'trace' => 3,
+                  'info'  => "Attempted to decompress '$file'",
+                  'error' => "$GunzipError",
+                  'msg'   => "$GunzipError"
+              }
+        } catch {
+            classify(
+                $ARG, {
+                    default => sub {
+                        $error->err_msg($ARG, "Invalid file type");
+                        throw($ARG);
+                    }
+                }
+            )
+        };
     }
 
     true;
