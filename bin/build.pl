@@ -157,15 +157,15 @@ package main v1.0.0 {
             given ($mime) {
                 when ('application/gzip') {
                     # this is likely a tarball with gzip compression, so first uncompress archive
-                    cout "Decompressing gzip", true, $color_output. 'bold cyan';
+                    cout "Decompressing gzip", true, $color_output, 'bold cyan', true;
                     my $gzip = GNUzip::Decompress->new();
                     $gzip->decompress("$source_dir/$file_name");
+                    cout "Expanding Tape Archive", true, $color_output, 'bold cyan', true;
                 }
                 default {
-                    cout "Unknown error";
+                    cout "Unknown error: MIME type $mime unknown";
                 }
             }
-            cout "error";
 
             # enter package source directory
 
